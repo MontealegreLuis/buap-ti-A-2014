@@ -1,12 +1,12 @@
 <?php
-use \Autoloader\StandarAutoloader;
+use \Autoloader\StandardAutoloader;
 use \Html\Document;
 use \Html\Element;
 use \Html\Collection;
 use \Renderer\HtmlRenderer;
 
 require 'Autoloader/StandardAutoloader.php';
-spl_autoload_register(new StandarAutoloader());
+spl_autoload_register(new StandardAutoloader());
 
 $document = new Document(
     'html5', new Element('head'), new Element('body')
