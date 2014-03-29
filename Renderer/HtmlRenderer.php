@@ -3,7 +3,7 @@ namespace Renderer;
 
 use Html\Element;
 
-class HtmlRenderer
+class HtmlRenderer implements Renderer
 {
     /**
      * @param  Element $element
