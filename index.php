@@ -1,5 +1,6 @@
 <?php
-use \Autoloader\StandardAutoloader;
+require 'autoload.php';
+
 use \Html\Document;
 use \Html\Element;
 use \Html\Collection;
@@ -8,9 +9,6 @@ use \Handler\ExceptionHandler;
 use \Handler\ErrorHandler;
 use \Renderer\CallbackRenderer;
 use \Filter\ToLowerFilter;
-
-require 'Autoloader/StandardAutoloader.php';
-spl_autoload_register(new StandardAutoloader());
 
 $ul = new Collection('ul', [
     new Element('li', 'First'),
