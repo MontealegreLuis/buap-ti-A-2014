@@ -1,32 +1,55 @@
 <?php
 namespace Database\ResultSet;
 
-class ReflectionResultSet
+use \ReflectionClass;
+
+class ReflectionResultSet implements ResultSet
 {
+    /** @type object */
     protected $prototype;
+
+    /** @type object[] */
     protected $objects = [];
 
+    /**
+     * @param object $prototype
+     */
     public function __construct($prototype)
     {
         $this->prototype = $prototype;
     }
 
+    /**
+     * @param array $rows
+     */
     public function populate(array $rows)
     {
-        $className = get_class($this->prototype);
-        $reflectionClass = new \ReflectionClass($className);
+        $reflectionClass = new ReflectionClass(get_class($this->prototype));
         $properties = $reflectionClass->getProperties() ;
 
         foreach ($rows as $row) {
-            $object = clone $this->prototype;
-            foreach ($properties as $property) {
-                $property->setAccessible(true);
-                $property->setValue($object, $row[$property->getName()]);
-            }
-            $this->objects[] = $object;
+            $this->objects[] = $this->createObject($row, $properties);
         }
     }
 
+    /**
+     * @param  array  $properties
+     * @return object
+     */
+    protected function createObject(array $row, array $properties)
+    {
+        $object = clone $this->prototype;
+        foreach ($properties as $property) {
+            $property->setAccessible(true);
+            $property->setValue($object, $row[$property->getName()]);
+        }
+
+        return $object;
+    }
+
+    /**
+     * @return array
+     */
     public function getRows()
     {
         return $this->objects;
