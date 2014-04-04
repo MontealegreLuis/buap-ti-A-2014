@@ -2,37 +2,26 @@
 namespace ProductCatalog;
 
 use \Database\Query\QueryBuilder;
-use \Database\ResultSet\ReflectionResultSet;
-use \Cache\CacheAdapter;
 use \PDO;
 
-class ProductRepository
+class ProductRepository implements ProductRepositoryInterface
 {
     /** @type PDO */
     protected $connection;
 
-    /** @type CacheAdapter */
-    protected $cache;
-
     /**
-     * @param PDO          $connection
-     * @param CacheAdapter $cache
+     * @param PDO $connection
      */
-    public function __construct(PDO $connection, CacheAdapter $cache)
+    public function __construct(PDO $connection)
     {
         $this->connection = $connection;
-        $this->cache = $cache;
     }
 
     /**
-     * @return Product[]
+     * @return array
      */
     public function allProducts()
     {
-        if ($this->cache->contains('products')) {
-            return $this->cache->fetch('products');
-        }
-
         $builder = new QueryBuilder();
         $query = $builder->createQuery()
                          ->select(['*'])
@@ -42,13 +31,6 @@ class ProductRepository
         $statement = $this->connection->prepare($query->getSQL());
         $statement->execute();
 
-        $resultSet = new ReflectionResultSet(new Product());
-        $resultSet->populate($statement->fetchAll(PDO::FETCH_ASSOC));
-
-        $products = $resultSet->getRows();
-
-        $this->cache->save('products', $products);
-
-        return $products;
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
