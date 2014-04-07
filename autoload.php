@@ -1,5 +1,5 @@
 <?php
-use Autoloader\StandardAutoloader;
+use Framework\Autoloader\StandardAutoloader;
 
-require 'Autoloader/StandardAutoloader.php';
+require 'src/Framework/Autoloader/StandardAutoloader.php';
 spl_autoload_register(new StandardAutoloader());

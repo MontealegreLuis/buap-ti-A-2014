@@ -1,0 +1,9 @@
+<ul>
+    <?php foreach ($this->products as $product) : ?>
+        <li>
+            <a href="/products/show/id/<?php echo $product->id ?>">
+                <?php echo $product->model ?>
+            </a>
+        </li>
+    <?php endforeach ?>
+</ul>

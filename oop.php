@@ -1,14 +1,14 @@
 <?php
 require 'autoload.php';
 
-use \Html\Document;
-use \Html\Element;
-use \Html\Collection;
-use \Exporter\HtmlExporter;
-use \Handler\ExceptionHandler;
-use \Handler\ErrorHandler;
-use \Renderer\CallbackRenderer;
-use \Filter\ToLowerFilter;
+use \Examples\Html\Document;
+use \Examples\Html\Element;
+use \Examples\Html\Collection;
+use \Examples\Exporter\HtmlExporter;
+use \Examples\Handler\ExceptionHandler;
+use \Examples\Handler\ErrorHandler;
+use \Examples\Renderer\CallbackRenderer;
+use \Examples\Filter\ToLowerFilter;
 
 $ul = new Collection('ul', [
     new Element('li', 'First'),

@@ -1,8 +1,8 @@
 <?php
 require 'autoload.php';
 
-use Html\Element;
-use Html\Document;
+use Examples\Html\Element;
+use Examples\Html\Document;
 
 $stack = new SplStack();
 $stack->push(new stdClass());

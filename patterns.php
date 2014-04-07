@@ -1,10 +1,10 @@
 <?php
-use \Events\EventsDispatcher;
-use \Logger\FilesystemLogger;
-use \Database\DriverManager;
-use \Database\ResultSet\ReflectionResultSet;
-use \Cache\FileSystemCacheAdapter;
-use \Cache\FileSystemCache;
+use \Framework\Events\EventsDispatcher;
+use \Framework\Logger\FilesystemLogger;
+use \Framework\Database\DriverManager;
+use \Framework\Database\ResultSet\ReflectionResultSet;
+use \Framework\Cache\FileSystemCacheAdapter;
+use \Framework\Cache\FileSystemCache;
 use \ProductCatalog\Listener\LogListedProducts;
 use \ProductCatalog\ProductRepositoryCache;
 use \ProductCatalog\ProductRepository;
@@ -26,7 +26,7 @@ $dispatcher->attach('products.listed', new LogListedProducts($logger));
 $listProducts = new ListAllProducts($productRepository, $resultSet);
 $listProducts->setEventsDispatcher($dispatcher);
 
-$products = $listProducts->getAllProducts();
-foreach ($products as $product) {
-    echo "{$product->getModel()}\n";
+$response = $listProducts->getAllProducts();
+foreach ($response->products as $product) {
+    echo "{$product->model}\n";
 }
