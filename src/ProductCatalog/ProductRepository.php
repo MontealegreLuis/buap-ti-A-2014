@@ -34,6 +34,9 @@ class ProductRepository implements ProductRepositoryInterface
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @see \ProductCatalog\ProductRepositoryInterface::productOfId()
+     */
     public function productOfId($productId)
     {
         $builder = new QueryBuilder();

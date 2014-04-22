@@ -3,7 +3,7 @@ namespace ProductCatalog;
 
 class Product
 {
-    /** @type ineteger */
+    /** @type integer */
     protected $id;
 
     /** @type string */
@@ -11,6 +11,18 @@ class Product
 
     /** @type string */
     protected $features;
+
+    /**
+     * @param string  $model
+     * @param string  $features
+     * @param integer $id
+     */
+    public function __construct($model, $features, $id = null)
+    {
+        $this->model = $model;
+        $this->features = $features;
+        $this->id = $id;
+    }
 
     /**
      * @param  ProductView $view
